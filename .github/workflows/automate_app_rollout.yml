@@ -26,9 +26,7 @@ jobs:
       - name: Print env variables
         run: |
             echo "BETA_ROLL_OUT_PERCENTAGE=$(cat beta_percentage.txt)" >> $GITHUB_ENV
-#            echo "PRODUCTION_ROLL_OUT_PERCENTAGE=$(cat production_percentage.txt)" >> $GITHUB_ENV
             echo "BETA_ROLL_OUT_PERCENTAGE=${{ env.BETA_ROLL_OUT_PERCENTAGE }}"
-#            echo "PRODUCTION_ROLL_OUT_PERCENTAGE=${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}"
 
       - name: Add env variables
         run: |
