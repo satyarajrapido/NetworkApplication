@@ -53,26 +53,26 @@ jobs:
         run: |
           if [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 50 ]; then
             echo "Updating beta to 50%"  
-            echo 50 > beta_percentage.txt
+            echo 50 > percentage.txt
           elif [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 100 ]; then
             echo "Updating beta to 100%"  
-            echo 100 > beta_percentage.txt
+            echo 100 > percentage.txt
           elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 5 ]; then
             echo "Updating production to 5%"  
-            echo 5 > production_percentage.txt
+            echo 5 > percentage.txt
           elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 10 ]; then
             echo "Updating production to 10%"  
-            echo 10 > production_percentage.txt
+            echo 10 > percentage.txt
           elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 25 ]; then
             echo "Updating production to 25%"
-            echo 25 > production_percentage.txt
+            echo 25 > percentage.txt
           elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 75 ]; then
             echo "Updating production by 25%"
             NEW_PERCENTAGE=$((env.PRODUCTION_ROLL_OUT_PERCENTAGE + 25))
-            echo "$NEW_PERCENTAGE" > production_percentage.txt
+            echo "$NEW_PERCENTAGE" > percentage.txt
           elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 100 ]; then
             echo "Updating production to 100%"
-            echo 100 > production_percentage.txt
+            echo 100 > percentage.txt
           fi
         continue-on-error: true
 
