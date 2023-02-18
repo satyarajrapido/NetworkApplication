@@ -19,14 +19,13 @@ jobs:
       - name: Download workflow artifact
         uses: dawidd6/action-download-artifact@v2.25.0
         with:
-          name: my-artifact-name
-          search_artifacts: true
-          path: beta_percentage.txt
+          name: rollout_percentage
+          path: percentage.txt
 
       - name: Print env variables
         run: |
-            ls beta_percentage.txt/beta_percentage.txt/beta_percentage.txt
-            echo "BETA_ROLL_OUT_PERCENTAGE=$(head beta_percentage.txt/beta_percentage.txt/beta_percentage.txt)" >> $GITHUB_ENV
+            ls percentage.txt
+            echo "BETA_ROLL_OUT_PERCENTAGE=$(head percentage.txt)" >> $GITHUB_ENV
             echo "BETA_ROLL_OUT_PERCENTAGE=${{ env.BETA_ROLL_OUT_PERCENTAGE }}"
 
       - name: Add env variables
@@ -83,8 +82,8 @@ jobs:
       - name: Save artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: my-artifact-name
-          path: beta_percentage.txt
+          name: rollout_percentage
+          path: percentage.txt
 
 #      - name: Stop Workflow
 #        if: ${{ contains(steps.UpdateRolloutPercentage.outputs.result, '100') }}
