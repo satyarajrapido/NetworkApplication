@@ -29,13 +29,14 @@ jobs:
 #            production_percentage.txt
 #            beta_percentage.txt
 
-      - name: Restore artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: my-artifact-name
-          path: |
-            production_percentage.txt
-            beta_percentage.txt
+    - name: Download workflow artifact
+      uses: dawidd6/action-download-artifact@v2.25.0
+      with:
+        workflow: automate_app_rollout.yml
+        name: my-artifact-name
+        path: |
+          production_percentage.txt
+          beta_percentage.txt
         continue-on-error: true
 
       - name: Read value
