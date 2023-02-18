@@ -13,12 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Download workflow artifact
-        uses: dawidd6/action-download-artifact@v2.25.0
+      - name: Retrieve integer from cache
+        uses: actions/cache@v3
         with:
-          name: rollout_percentage
-          path: percentage.txt
-          if_no_artifact_found: ignore
+          path: |
+            percentage.txt
+          key: ${{ runner.os }}-percentage-${{ hashFiles('percentage.txt') }}
 
       - name: Print env variables
         run: |
@@ -76,11 +76,15 @@ jobs:
           fi
         continue-on-error: true
 
-      - name: Save artifacts
-        uses: actions/upload-artifact@v2
+      - name: Save integer to cache
+        uses: actions/cache@v3
         with:
-          name: rollout_percentage
-          path: percentage.txt
+          path: |
+              percentage.txt
+          key: ${{ runner.os }}-percentage-${{ hashFiles('percentage.txt') }}
+          restore-keys: |
+              ${{ runner.os }}-percentage-
+              ${{ runner.os }}-
 
 #      - name: Update app rollout to slack group
 #        uses: rtCamp/action-slack-notify@v2
