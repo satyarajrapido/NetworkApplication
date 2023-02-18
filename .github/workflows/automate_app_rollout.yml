@@ -1,4 +1,4 @@
-name: Update Rollout Percentage
+name: Rollout Percentage
 
 on:
   push:
