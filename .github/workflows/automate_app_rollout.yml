@@ -16,6 +16,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Create artifact
+        run: |
+          touch production_percentage.txt
+          touch beta_percentage.txt
+
+      - name: Save artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact-name
+          path: |
+            production_percentage.txt
+            beta_percentage.txt  
+
       - name: Restore artifact
         uses: actions/download-artifact@v2
         with:
