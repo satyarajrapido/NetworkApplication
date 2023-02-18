@@ -20,11 +20,12 @@ jobs:
         uses: dawidd6/action-download-artifact@v2.25.0
         with:
           name: my-artifact-name
-          check_artifacts: true
-          path: beta_percentage.txt/beta_percentage.txt
+          search_artifacts: true
+          path: beta_percentage.txt
 
       - name: Print env variables
         run: |
+            ls -l beta_percentage.txt
             echo "BETA_ROLL_OUT_PERCENTAGE=$(cat beta_percentage.txt)" >> $GITHUB_ENV
             echo "BETA_ROLL_OUT_PERCENTAGE=${{ env.BETA_ROLL_OUT_PERCENTAGE }}"
 
