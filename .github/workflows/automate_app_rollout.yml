@@ -19,6 +19,9 @@ on:
   schedule:
     - cron: '*/1 * * * *' # Runs every minute
 
+env:
+  SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
+
 jobs:
   update_rollout:
     runs-on: ubuntu-latest
@@ -79,5 +82,5 @@ jobs:
         env:
             SLACK_MESSAGE: Rollout percentage updated to ${{ steps.update_rollout_percentage.outputs.result }}.
             SLACK_TITLE: Captain App Rollout Updates
-            SLACK_WEBHOOK: 'https://hooks.slack.com/services/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'
+            SLACK_WEBHOOK: ${{ env.SLACK_WEBHOOK_URL }}
             MSG_MINIMAL: true
