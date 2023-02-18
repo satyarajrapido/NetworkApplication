@@ -93,10 +93,10 @@ jobs:
         continue-on-error: true
 
       - name: Save artifacts
-          uses: actions/upload-artifact@v2
-          with:
-            name: my-artifact-name
-            path: |
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact-name
+          path: |
               production_percentage.txt
               beta_percentage.txt
 
