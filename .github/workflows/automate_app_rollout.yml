@@ -31,11 +31,11 @@ jobs:
 
       - name: Add env variables
         run: |
-          if [ -n "${{ env.BETA_ROLL_OUT_PERCENTAGE }}" ]; then
+          if [ -z "${{ env.BETA_ROLL_OUT_PERCENTAGE }}" ]; then
             echo "BETA_ROLL_OUT_PERCENTAGE=0" >> $GITHUB_ENV
           fi
           
-          if [ -n "${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}" ]; then
+          if [ -z "${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}" ]; then
             echo "PRODUCTION_ROLL_OUT_PERCENTAGE=0" >> $GITHUB_ENV
           fi
           
