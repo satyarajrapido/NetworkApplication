@@ -1,4 +1,4 @@
-#Run this workflow every 1 minu
+#Run this workflow every 1 min
 name: Rollout Percentage
 
 on:
