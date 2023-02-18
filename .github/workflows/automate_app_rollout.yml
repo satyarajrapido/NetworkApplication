@@ -55,26 +55,26 @@ jobs:
       - name: Update Rollout Percentage
         id: update_rollout_percentage
         run: |
-          if [ "${{ env.BETA_ROLL_OUT_PERCENTAGE }}" -lt 50]; then
+          if [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 50]; then
             echo "Updating beta to 50%"  
             echo "BETA_ROLL_OUT_PERCENTAGE=50" >> $GITHUB_ENV
-          elif [ "${{ env.BETA_ROLL_OUT_PERCENTAGE }}" -lt 100 ]; then
+          elif [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 100 ]; then
             echo "Updating beta to 100%"  
             echo "BETA_ROLL_OUT_PERCENTAGE=100" >> $GITHUB_ENV
-          elif [ "${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}" -lt 5 ]; then
+          elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 5 ]; then
             echo "Updating production to 5%"  
             echo "PRODUCTION_ROLL_OUT_PERCENTAGE=5" >> $GITHUB_ENV
-          elif [ "${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}" -lt 10 ]; then
+          elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 10 ]; then
             echo "Updating production to 10%"  
             echo "PRODUCTION_ROLL_OUT_PERCENTAGE=10" >> $GITHUB_ENV
-          elif [ "${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}" -lt 25 ]; then
+          elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 25 ]; then
             echo "Updating production to 25%"
             echo "PRODUCTION_ROLL_OUT_PERCENTAGE=25" >> $GITHUB_ENV
-          elif [ "${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}" -lt 75 ]; then
+          elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 75 ]; then
             echo "Updating production by 25%"
             NEW_PERCENTAGE=$((env.PRODUCTION_ROLL_OUT_PERCENTAGE + 25))
             echo "PRODUCTION_ROLL_OUT_PERCENTAGE=$NEW_PERCENTAGE" >> $GITHUB_ENV
-          elif [ "${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}" -lt 100 ]; then
+          elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 100 ]; then
             echo "Updating production to 100%"
             echo "PRODUCTION_ROLL_OUT_PERCENTAGE=100" >> $GITHUB_ENV
           fi
