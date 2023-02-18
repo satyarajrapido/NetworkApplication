@@ -21,6 +21,7 @@ jobs:
         with:
           name: rollout_percentage
           path: percentage.txt
+          if_no_artifact_found: ignore
 
       - name: Print env variables
         run: |
