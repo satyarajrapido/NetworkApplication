@@ -16,27 +16,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-#      - name: Create artifact
-#        run: |
-#          touch production_percentage.txt
-#          touch beta_percentage.txt
-#
-#      - name: Save artifacts
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: my-artifact-name
-#          path: |
-#            production_percentage.txt
-#            beta_percentage.txt
-
-    - name: Download workflow artifact
-      uses: dawidd6/action-download-artifact@v2.25.0
-      with:
-        name: my-artifact-name
-        path: |
-          production_percentage.txt
-          beta_percentage.txt
-        continue-on-error: true
+      - name: Download workflow artifact
+        uses: dawidd6/action-download-artifact@v2.25.0
+        with:
+          name: my-artifact-name
+          path: |
+            production_percentage.txt
+            beta_percentage.txt
 
       - name: Read value
         run: |
