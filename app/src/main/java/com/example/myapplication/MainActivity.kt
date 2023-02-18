@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("TAG", "endTime: $endTime")
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                getNetworkUsageForApp("com.rapido.passenger", startTime, endTime).let {
+                getNetworkUsageForApp("com.ubercab.driver", startTime, endTime).let {
                     Log.d("TAG", "USAGE: $it")
                 }
             }else{

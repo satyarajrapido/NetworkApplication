@@ -1,0 +1,83 @@
+name: Update Rollout Percentage
+#github.event.inputs.pause
+on:
+  workflow_dispatch:
+    inputs:
+      percent:
+        description: 'Current rollout percentage'
+        default: 50
+        required: false
+        type: number
+      track:
+        type: choice
+        required: true
+        description: Track
+        options:
+          - production
+          - beta
+
+  schedule:
+    - cron: '*/1 * * * *' # Runs every minute
+
+jobs:
+  update_rollout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+#      - name: Check if rollout is running
+#        if: ${{ github.event.inputs.halt == 'false' }}
+#        run: |
+#          echo "ROLL_OUT_STATUS=running" >> $GITHUB_ENV
+#
+#      - name: Check if rollout is halted
+#        if: ${{ github.event.inputs.halt == 'true' }}
+#        run: |
+#          echo "Rollout has been halted"
+#          echo "ROLL_OUT_STATUS=halted" >> $GITHUB_ENV
+#          exit 1
+
+      - name: Update Rollout Percentage
+        id: update_rollout_percentage
+        run: |
+          if [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 50]; then
+            echo "Updating beta to 50%"  
+            echo "BETA_ROLL_OUT_PERCENTAGE=50" >> $GITHUB_ENV
+          elif [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 100 ]; then
+            echo "Updating beta to 100%"  
+            echo "BETA_ROLL_OUT_PERCENTAGE=100" >> $GITHUB_ENV
+          elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 5 ]; then
+            echo "Updating production to 5%"  
+            echo "PRODUCTION_ROLL_OUT_PERCENTAGE=5" >> $GITHUB_ENV
+          elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 10 ]; then
+            echo "Updating production to 10%"  
+            echo "PRODUCTION_ROLL_OUT_PERCENTAGE=10" >> $GITHUB_ENV
+          elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 25 ]; then
+            echo "Updating production to 25%"
+            echo "PRODUCTION_ROLL_OUT_PERCENTAGE=25" >> $GITHUB_ENV
+          elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 75 ]; then
+            echo "Updating production by 25%"
+            NEW_PERCENTAGE=$((env.PRODUCTION_ROLL_OUT_PERCENTAGE + 25))
+            echo "PRODUCTION_ROLL_OUT_PERCENTAGE=$NEW_PERCENTAGE" >> $GITHUB_ENV
+          elif [ ${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }} -lt 100 ]; then
+            echo "Updating production to 100%"
+            echo "PRODUCTION_ROLL_OUT_PERCENTAGE=100" >> $GITHUB_ENV
+          fi
+
+        continue-on-error: true
+
+#      - name: Stop Workflow
+#        if: ${{ contains(steps.UpdateRolloutPercentage.outputs.result, '100') }}
+#        run: |
+#          echo "Rollout percentage for production release is now 100%. Stopping workflow."
+#          exit 0
+#        continue-on-error: true
+
+      - name: Update app rollout to slack group
+        uses: rtCamp/action-slack-notify@v2
+        env:
+            SLACK_MESSAGE: Rollout percentage updated to ${{ steps.update_rollout_percentage.outputs.result }}.
+            SLACK_TITLE: Captain App Rollout Updates
+            SLACK_WEBHOOK: 'https://hooks.slack.com/services/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'
+            MSG_MINIMAL: true
