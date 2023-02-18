@@ -82,13 +82,6 @@ jobs:
           name: rollout_percentage
           path: percentage.txt
 
-#      - name: Stop Workflow
-#        if: ${{ contains(steps.UpdateRolloutPercentage.outputs.result, '100') }}
-#        run: |
-#          echo "Rollout percentage for production release is now 100%. Stopping workflow."
-#          exit 0
-#        continue-on-error: true
-
 #      - name: Update app rollout to slack group
 #        uses: rtCamp/action-slack-notify@v2
 #        env:
