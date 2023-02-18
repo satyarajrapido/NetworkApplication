@@ -1,23 +1,10 @@
+#Run this workflow every 1 minute
 name: Rollout Percentage
 
 on:
   push:
-    inputs:
-      percent:
-        description: 'Current rollout percentage'
-        default: 50
-        required: false
-        type: number
-      track:
-        type: choice
-        required: true
-        description: Track
-        options:
-          - production
-          - beta
-
-  schedule:
-    - cron: '*/1 * * * *' # Runs every minute
+    schedule:
+    - cron: '*/1 * * * *'
 
 env:
   SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
