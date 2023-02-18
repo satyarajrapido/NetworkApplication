@@ -20,16 +20,15 @@ jobs:
         uses: dawidd6/action-download-artifact@v2.25.0
         with:
           name: my-artifact-name
+          search_artifacts: true
           path: |
             production_percentage.txt
             beta_percentage.txt
-
-      - name: Read value
         run: |
-          echo "BETA_ROLL_OUT_PERCENTAGE=$(cat beta_percentage.txt)" >> $GITHUB_ENV
-          echo "PRODUCTION_ROLL_OUT_PERCENTAGE=$(cat production_percentage.txt)" >> $GITHUB_ENV
-          echo "BETA_ROLL_OUT_PERCENTAGE=${{ env.BETA_ROLL_OUT_PERCENTAGE }}"
-          echo "PRODUCTION_ROLL_OUT_PERCENTAGE=${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}"
+            echo "BETA_ROLL_OUT_PERCENTAGE=$(cat beta_percentage.txt)" >> $GITHUB_ENV
+            echo "PRODUCTION_ROLL_OUT_PERCENTAGE=$(cat production_percentage.txt)" >> $GITHUB_ENV
+            echo "BETA_ROLL_OUT_PERCENTAGE=${{ env.BETA_ROLL_OUT_PERCENTAGE }}"
+            echo "PRODUCTION_ROLL_OUT_PERCENTAGE=${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}"
 
       - name: Add env variables
         run: |
