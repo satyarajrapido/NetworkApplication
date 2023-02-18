@@ -21,8 +21,7 @@ jobs:
         with:
           name: my-artifact-name
           search_artifacts: true
-          path: |
-             beta_percentage.txt
+          path: beta_percentage.txt
 
       - name: Print env variables
         run: |
@@ -86,8 +85,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact-name
-          path: |
-              beta_percentage.txt
+          path: beta_percentage.txt
 
 #      - name: Stop Workflow
 #        if: ${{ contains(steps.UpdateRolloutPercentage.outputs.result, '100') }}
