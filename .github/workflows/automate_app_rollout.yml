@@ -22,8 +22,7 @@ jobs:
           name: my-artifact-name
           search_artifacts: true
           path: |
-#            production_percentage.txt
-            beta_percentage.txt
+             beta_percentage.txt
 
       - name: Print env variables
         run: |
@@ -88,7 +87,6 @@ jobs:
         with:
           name: my-artifact-name
           path: |
-#              production_percentage.txt
               beta_percentage.txt
 
 #      - name: Stop Workflow
