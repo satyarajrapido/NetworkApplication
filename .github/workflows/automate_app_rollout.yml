@@ -55,7 +55,7 @@ jobs:
       - name: Update Rollout Percentage
         id: update_rollout_percentage
         run: |
-          if [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 50]; then
+          if [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 50 ]; then
             echo "Updating beta to 50%"  
             echo "BETA_ROLL_OUT_PERCENTAGE=50" >> $GITHUB_ENV
           elif [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 100 ]; then
