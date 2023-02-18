@@ -32,7 +32,6 @@ jobs:
     - name: Download workflow artifact
       uses: dawidd6/action-download-artifact@v2.25.0
       with:
-        workflow: automate_app_rollout.yml
         name: my-artifact-name
         path: |
           production_percentage.txt
