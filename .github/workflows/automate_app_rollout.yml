@@ -36,18 +36,6 @@ jobs:
           fi
           
 
-#      - name: Check if rollout is running
-#        if: ${{ github.event.inputs.halt == 'false' }}
-#        run: |
-#          echo "ROLL_OUT_STATUS=running" >> $GITHUB_ENV
-#
-#      - name: Check if rollout is halted
-#        if: ${{ github.event.inputs.halt == 'true' }}
-#        run: |
-#          echo "Rollout has been halted"
-#          echo "ROLL_OUT_STATUS=halted" >> $GITHUB_ENV
-#          exit 1
-
       - name: Update Rollout Percentage
         id: update_rollout_percentage
         run: |
