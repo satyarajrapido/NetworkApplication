@@ -73,9 +73,6 @@ jobs:
           path: |
               percentage.txt
           key: percentageKey
-          restore-keys: |
-              ${{ runner.os }}-percentage-
-              ${{ runner.os }}-
 
 #      - name: Update app rollout to slack group
 #        uses: rtCamp/action-slack-notify@v2
