@@ -29,6 +29,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Add env variables
+        run: |
+          if [ -n "${{ env.BETA_ROLL_OUT_PERCENTAGE }}" ]; then
+            echo "BETA_ROLL_OUT_PERCENTAGE=0" >> $GITHUB_ENV
+          fi
+          
+          if [ -n "${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}" ]; then
+            echo "PRODUCTION_ROLL_OUT_PERCENTAGE=0" >> $GITHUB_ENV
+          fi
+          
+
 #      - name: Check if rollout is running
 #        if: ${{ github.event.inputs.halt == 'false' }}
 #        run: |
@@ -67,7 +78,6 @@ jobs:
             echo "Updating production to 100%"
             echo "PRODUCTION_ROLL_OUT_PERCENTAGE=100" >> $GITHUB_ENV
           fi
-
         continue-on-error: true
 
 #      - name: Stop Workflow
