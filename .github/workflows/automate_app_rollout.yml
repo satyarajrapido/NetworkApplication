@@ -18,7 +18,7 @@ jobs:
         with:
           path: |
             percentage.txt
-          key: ${{ runner.os }}-percentage-${{ hashFiles('percentage.txt') }}
+          key: percentageKey
 
       - name: Print env variables
         run: |
@@ -42,6 +42,9 @@ jobs:
           if [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 50 ]; then
             echo "Updating beta to 50%"  
             echo 50 > percentage.txt
+          elif [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 75 ]; then
+            echo "Updating beta to 75%"  
+            echo 75 > percentage.txt
           elif [ ${{ env.BETA_ROLL_OUT_PERCENTAGE }} -lt 100 ]; then
             echo "Updating beta to 100%"  
             echo 100 > percentage.txt
@@ -69,7 +72,7 @@ jobs:
         with:
           path: |
               percentage.txt
-          key: ${{ runner.os }}-percentage-${{ hashFiles('percentage.txt') }}
+          key: percentageKey
           restore-keys: |
               ${{ runner.os }}-percentage-
               ${{ runner.os }}-
