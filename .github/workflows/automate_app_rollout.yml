@@ -1,5 +1,5 @@
 name: Update Rollout Percentage
-#github.event.inputs.pause
+
 on:
   workflow_dispatch:
     inputs:
@@ -33,7 +33,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: my-artifact-name
-          path: beta_percentage.txt
+          path: |
+            production_percentage.txt
+            beta_percentage.txt
       - name: Read value
         run: |
           echo "BETA_ROLL_OUT_PERCENTAGE=$(cat beta_percentage.txt)" >> $GITHUB_ENV
@@ -90,7 +92,7 @@ jobs:
           fi
         continue-on-error: true
 
-        - name: Save artifacts
+      - name: Save artifacts
           uses: actions/upload-artifact@v2
           with:
             name: my-artifact-name
