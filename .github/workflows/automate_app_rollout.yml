@@ -74,7 +74,7 @@ jobs:
               percentage.txt
           key: percentageKey
 
-#      - name: Update app rollout to slack group
+#      - name: Update app rollout to slack grou
 #        uses: rtCamp/action-slack-notify@v2
 #        env:
 #            SLACK_MESSAGE: Rollout percentage updated to ${{ steps.update_rollout_percentage.outputs.result }}.
