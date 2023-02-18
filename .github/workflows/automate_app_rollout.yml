@@ -4,7 +4,7 @@ name: Rollout Percentage
 on:
   push:
     schedule:
-    - cron: '*/1 * * * *'
+    - cron: '*/5 * * * *'
 
 env:
   SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
@@ -16,18 +16,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create artifact
-        run: |
-          touch production_percentage.txt
-          touch beta_percentage.txt
-
-      - name: Save artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: my-artifact-name
-          path: |
-            production_percentage.txt
-            beta_percentage.txt  
+#      - name: Create artifact
+#        run: |
+#          touch production_percentage.txt
+#          touch beta_percentage.txt
+#
+#      - name: Save artifacts
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: my-artifact-name
+#          path: |
+#            production_percentage.txt
+#            beta_percentage.txt
 
       - name: Restore artifact
         uses: actions/download-artifact@v2
@@ -42,6 +42,8 @@ jobs:
         run: |
           echo "BETA_ROLL_OUT_PERCENTAGE=$(cat beta_percentage.txt)" >> $GITHUB_ENV
           echo "PRODUCTION_ROLL_OUT_PERCENTAGE=$(cat production_percentage.txt)" >> $GITHUB_ENV
+          echo "BETA_ROLL_OUT_PERCENTAGE=${{ env.BETA_ROLL_OUT_PERCENTAGE }}"
+          echo "PRODUCTION_ROLL_OUT_PERCENTAGE=${{ env.PRODUCTION_ROLL_OUT_PERCENTAGE }}"
 
       - name: Add env variables
         run: |
