@@ -10,7 +10,7 @@ env:
   SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
 
 jobs:
-  update_rollout:
+  rollout:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
