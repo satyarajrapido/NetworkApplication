@@ -36,11 +36,12 @@ jobs:
           path: |
             production_percentage.txt
             beta_percentage.txt
+        continue-on-error: true
+
       - name: Read value
         run: |
           echo "BETA_ROLL_OUT_PERCENTAGE=$(cat beta_percentage.txt)" >> $GITHUB_ENV
           echo "PRODUCTION_ROLL_OUT_PERCENTAGE=$(cat production_percentage.txt)" >> $GITHUB_ENV
-        continue-on-error: true
 
       - name: Add env variables
         run: |
