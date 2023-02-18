@@ -1,7 +1,7 @@
 name: Update Rollout Percentage
 
 on:
-  workflow_dispatch:
+  push:
     inputs:
       percent:
         description: 'Current rollout percentage'
@@ -39,7 +39,8 @@ jobs:
       - name: Read value
         run: |
           echo "BETA_ROLL_OUT_PERCENTAGE=$(cat beta_percentage.txt)" >> $GITHUB_ENV
-          echo "PRODUCTION_ROLL_OUT_PERCENTAGE=$(cat production_percentage.txt)" >> $GITHUB_ENV 
+          echo "PRODUCTION_ROLL_OUT_PERCENTAGE=$(cat production_percentage.txt)" >> $GITHUB_ENV
+        continue-on-error: true
 
       - name: Add env variables
         run: |
