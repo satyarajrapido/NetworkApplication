@@ -33,6 +33,5 @@ jobs:
       - name: Save integer to cache
         uses: actions/cache@v3
         with:
-          path: |
-              percentage.txt
+          path: percentage.txt
           key: percentageTestKey

@@ -1,0 +1,13 @@
+name: Workflow 2
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get input
+        run: |
+          echo "My integer is $(cat my_output.txt | jq -r '.my_integer')"
+        shell: bash
