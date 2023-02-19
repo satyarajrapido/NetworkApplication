@@ -2,7 +2,7 @@
 name: Rollout Percentage
 
 on:
-  push:
+  workflow_dispatch:
     schedule:
     - cron: '*/5 * * * *'
 
@@ -18,7 +18,7 @@ jobs:
         with:
           path: |
             percentage.txt
-          key: percentageKey-${{ github.run_number }}
+          key: percentageKey
 
       - name: Print env variables
         run: |
@@ -72,7 +72,17 @@ jobs:
         with:
           path: |
               percentage.txt
-          key: percentageKey-${{ github.run_number }}
+          key: percentageKey
+
+#      - name: Create commits
+#        run: |
+#            git config user.name 'github-actions'
+#            git config user.email 'github-actions@github.com'
+#            echo ${{join(steps.upload-file.outputs.uploaded, '\n')}} >> percentage.txt
+#            git add .
+#            git commit --no-verify -am "Added Build"
+#            git push --no-verify
+
 
 #      - name: Update app rollout to slack grou
 #        uses: rtCamp/action-slack-notify@v2

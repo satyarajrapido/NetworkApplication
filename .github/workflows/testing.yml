@@ -1,0 +1,37 @@
+#Run this workflow every 1 min
+name: Rollout Percentage
+
+on:
+  push:
+
+jobs:
+  rollout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Retrieve integer from cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            percentage.txt
+          key: percentageTestKey
+
+      - name: Print env variables
+        run: |
+            echo "BETA_ROLL_OUT_PERCENTAGE=$(head percentage.txt)" >> $GITHUB_ENV
+
+      - name: Add env variables
+        run:  |
+          echo percentage.txt
+          50 > percentage.txt
+          echo percentage.txt
+          cat percentage.txt
+
+      - name: Save integer to cache
+        uses: actions/cache@v3
+        with:
+          path: |
+              percentage.txt
+          key: percentageTestKey
