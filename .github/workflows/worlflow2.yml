@@ -9,5 +9,5 @@ jobs:
     steps:
       - name: Get input
         run: |
-          echo "My integer is $(cat my_output.txt | jq -r '.my_integer')"
+          echo "My integer is $(cat percentage.txt)"
         shell: bash
