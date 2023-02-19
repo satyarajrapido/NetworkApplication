@@ -24,8 +24,10 @@ jobs:
 
       - name: Add env variables
         run:  |
-          echo percentage.txt
-          echo 50 > percentage.txt
+          echo "Previous content of percentage.txt"
+          cat percentage.txt
+          echo heloooooooo > percentage.txt
+          echo "New content of percentage.txt"
           cat percentage.txt
 
       - name: Save integer to cache
