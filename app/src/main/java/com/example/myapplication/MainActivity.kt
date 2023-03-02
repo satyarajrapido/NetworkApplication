@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { view ->
 
             val calendar = Calendar.getInstance()
-            calendar.set(Calendar.HOUR_OF_DAY, 15) // set to 3 PM
+            calendar.set(Calendar.HOUR_OF_DAY, 0) // set to 12 00 AM
             calendar.set(Calendar.MINUTE, 0)
             calendar.set(Calendar.SECOND, 0)
             calendar.set(Calendar.MILLISECOND, 0)
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
             Log.d("TAG", "startTime: $startTime")
 
-            calendar.set(Calendar.HOUR_OF_DAY, 17) // set to 5 PM
+            calendar.set(Calendar.HOUR_OF_DAY, 23) // set to 11 PM
             calendar.set(Calendar.MINUTE, 0)
             calendar.set(Calendar.SECOND, 0)
             calendar.set(Calendar.MILLISECOND, 0)
@@ -72,13 +72,28 @@ class MainActivity : AppCompatActivity() {
             Log.d("TAG", "endTime: $endTime")
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (isThisAppInstalledInMyDevice(packageManager, "com.ubercab.driver") == "") {
+                    Toast.makeText(this, "Uber app is not installed", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
                 getNetworkUsageForApp("com.ubercab.driver", startTime, endTime).let {
+                    Toast.makeText(this, "Today's Uber app usage is $it bytes", Toast.LENGTH_LONG).show()
                     Log.d("TAG", "USAGE: $it")
                 }
             }else{
                 Toast.makeText(this, "Not supported OS version", Toast.LENGTH_LONG).show()
             }
+        }
+    }
 
+    fun isThisAppInstalledInMyDevice(packageManager: PackageManager, packageName: String?): String {
+        return try {
+            val applicationInfo = packageName?.let { packageManager.getApplicationInfo(it, 0) }
+            Log.e("TAG", "FOUND: $applicationInfo")
+            applicationInfo?.loadLabel(packageManager).toString()
+        } catch (e: PackageManager.NameNotFoundException) {
+            Log.e("TAG", "NOT FOUND: $e")
+            ""
         }
     }
 
@@ -134,6 +149,8 @@ class MainActivity : AppCompatActivity() {
     fun getNetworkUsageForApp(packageName: String, startTime: Long, endTime: Long): Long {
         val packageManager = packageManager
         val uid = packageManager.getApplicationInfo(packageName, 0).uid
+
+        Log.e("TAG", "UID: $uid")
         val networkStatsManager = getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
 
         val mobileBucket = networkStatsManager.queryDetailsForUid(
@@ -179,7 +196,7 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("TAG", "BYTES: $mobileBytes + $wifiBytes")
 
-        return  convertBytesToMB(mobileBytes) + convertBytesToMB(wifiBytes)
+        return  mobileBytes + wifiBytes
     }
 
     //create a function to accept the bytes and convert it to MB
